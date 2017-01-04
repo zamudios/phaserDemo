@@ -1,13 +1,34 @@
 var demo = {};
+
+var centerX = 1500 / 2, centerY = 1000 / 2, mario; 
+
 demo.state0 = function(){};
 demo.state0.prototype = {
-	preload: function(){},
+	preload: function(){
+		game.load.image('mario', 'assets/sprites/mario.png');
+	},
 	create: function(){
 		game.stage.backgroundColor = '#80FF80';		
 		addChangeStateEventListerners();
 		game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-	},
-	update: function(){}	
+
+        mario = game.add.sprite(centerX, centerY, 'mario');
+        mario.anchor.setTo(0.5, 0.5);
+    },
+	update: function(){
+        if (game.input.keyboard.isDown(Phaser.Keyboard.RIGHT)){
+            mario.x += 4;
+        }
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.LEFT)){
+            mario.x -= 4;
+        }
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.UP)){
+            mario.y -= 4;
+        }
+        else if (game.input.keyboard.isDown(Phaser.Keyboard.DOWN)){
+            mario.y += 4;
+        }
+    }	
 };
 
 function changeState (i, stateNum){
